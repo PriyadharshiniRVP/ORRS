@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Product Recommendation System</h1>
+        <form method="POST">
+            <label for="context">Recommendation Context:</label>
+            <select name="context" id="context" required>
+                <option value="global">Global</option>
+                <option value="country">Country</option>
+                <option value="month">Month</option>
+            </select>
+            <label for="country">Country (if applicable):</label>
+            <input type="text" name="country" id="country" placeholder="e.g., France">
+            <label for="month">Month (1-12, if applicable):</label>
+            <input type="number" name="month" id="month" min="1" max="12" placeholder="e.g., 12">
+            <input type="submit" value="Get Recommendations">
+        </form>
+        <h2>Recommendations:</h2>
+        <ul>
+            {% for item, name in recommendations %}
+                <li>ID: {{ item }}<br>Name: {{ name }}</li>
+            {% endfor %}
+            {% if not recommendations %}
+                <li>No recommendations available.</li>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>
